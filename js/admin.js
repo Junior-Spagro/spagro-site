@@ -47,17 +47,35 @@
       .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 70);
   }
 
+  /* Manda no display direto em vez de usar o atributo hidden.
+     hidden so vale por display:none do navegador, entao qualquer display escrito no
+     CSS ganha dele e a tela "escondida" continua na frente — foi exatamente o que
+     aconteceu: .adm-login tem display:flex e ficava por cima do painel depois do login.
+     Aqui quem manda no estado e o JS, sem depender de nenhuma folha de estilo. */
+  function ver(el, visivel, comoMostrar) {
+    el.hidden = !visivel;
+    el.style.display = visivel ? (comoMostrar || 'block') : 'none';
+  }
+
   function mostrar(sessao) {
     var logado = !!sessao;
-    telaLogin.hidden = logado;
-    telaPainel.hidden = !logado;
+    ver(telaLogin, !logado, 'flex');
+    ver(telaPainel, logado, 'block');
     if (logado) {
       quemSou.textContent = sessao.user.email;
       carregar();
     }
   }
 
-  sb.auth.getSession().then(function (r) { mostrar(r.data.session); });
+  /* Se o boot quebrar, o Junio precisa ler o motivo — nao ficar olhando pra uma tela
+     parada sem saber se e a internet, a senha ou o site. */
+  function falhou(msg) {
+    erroLogin.textContent = msg;
+  }
+
+  sb.auth.getSession()
+    .then(function (r) { mostrar(r.data.session); })
+    .catch(function () { falhou('Não foi possível falar com o servidor. Recarregue a página.'); });
 
   formLogin.addEventListener('submit', function (e) {
     e.preventDefault();
