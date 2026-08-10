@@ -126,22 +126,22 @@ git add -A && git commit -m "o que mudou" && git push
 A Vercel publica sozinha. Quando um post é publicado no painel, um webhook do Supabase
 dispara o mesmo processo sem precisar de commit.
 
-### ⚠️ Armadilha: quem assina o commit
+### Por que este repositório é público
 
-Este repositório é **privado** e a conta Vercel é do plano **Hobby** — que não permite
-colaboração em repositório privado. A Vercel só constrói se o **autor do commit no `HEAD`**
-for o dono do time (a conta `Junior-Spagro`). Commit assinado por outra pessoa faz **todo**
-build a partir do git parar antes de começar: `readyState: BLOCKED`, zero log, e o Deploy
-Hook do blog para junto — ou seja, publicar post deixa de virar página.
+Não é descuido — é o que destrava o blog.
 
-Quem for mexer no código precisa configurar, dentro deste repositório:
+A conta Vercel é do plano **Hobby**, que não permite colaboração em repositório **privado**.
+Enquanto o repo era privado, a Vercel só construía se o autor do commit no `HEAD` fosse o
+dono do time: qualquer commit de outra pessoa fazia todo build a partir do git morrer antes
+de começar (`readyState: BLOCKED`, zero log) — **e o Deploy Hook do blog morria junto**, ou
+seja, publicar post deixava de virar página. Em repositório público a colaboração é livre e
+a restrição não existe.
 
-```bash
-git config user.name  "Junior-Spagro"
-git config user.email "315404518+Junior-Spagro@users.noreply.github.com"
-```
+Isso é seguro porque não há segredo aqui. Todo o `images/`, `css/`, `js/` e HTML já é servido
+para qualquer visitante. A chave do Supabase no `js/sb-config.js` é a `anon`, **pública por
+natureza** — ela vai para o navegador de todo mundo de qualquer jeito. Quem protege o banco é
+o RLS rodando no servidor, mais os dois cadeados descritos acima; ler o `supabase-setup.sql`
+não dá acesso a nada.
 
-Créditos de quem realmente escreveu vão em `Co-Authored-By:` na mensagem.
-
-Para acabar com a restrição de vez: tornar o repositório público (colaboração é livre em
-repo público) ou migrar a conta para o plano Pro.
+O que **não** pode entrar aqui: a `service_role` do Supabase, qualquer token da Vercel ou do
+GitHub, e arquivo `.env` (já coberto pelo `.gitignore`).
