@@ -95,3 +95,38 @@ create policy "capa upload admin" on storage.objects
 drop policy if exists "capa apaga admin" on storage.objects;
 create policy "capa apaga admin" on storage.objects
   for delete to authenticated using (bucket_id = 'blog' and public.e_admin());
+
+-- ---------------------------------------------------------------------------
+-- Rebuild automatico: publicou/editou/apagou post -> Vercel gera o HTML estatico.
+-- E o que faz o cliente ser autonomo. Sem isso o post existe no banco mas nunca
+-- vira pagina indexavel.
+--
+-- Feito com pg_net puro em vez do "Database Webhooks" do painel: menos peca movel
+-- e fica versionado aqui, entao recriar o projeto nao perde o comportamento.
+-- ---------------------------------------------------------------------------
+create extension if not exists pg_net;
+
+create or replace function public.avisa_vercel() returns trigger
+language plpgsql security definer set search_path = public as $fn$
+declare mexeu boolean;
+begin
+  -- rascunho nao dispara: o autor salva varias vezes enquanto escreve, e cada
+  -- disparo e uma build inteira. So interessa o que o leitor pode ver.
+  mexeu := case tg_op
+    when 'INSERT' then new.published
+    when 'DELETE' then old.published
+    else new.published or old.published
+  end;
+  if mexeu then
+    perform net.http_post(
+      url := 'https://api.vercel.com/v1/integrations/deploy/prj_IjrDHlcY0HT1cZruTUq42TIY9JNR/Zv4odRds1R',
+      body := '{}'::jsonb
+    );
+  end if;
+  return null;
+end $fn$;
+
+drop trigger if exists posts_rebuild on public.posts;
+create trigger posts_rebuild
+after insert or update or delete on public.posts
+for each row execute function public.avisa_vercel();

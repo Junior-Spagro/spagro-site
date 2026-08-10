@@ -123,8 +123,10 @@ Se um dia migrar para o plano pago, esse cron pode sair.
 git add -A && git commit -m "o que mudou" && git push
 ```
 
-A Vercel publica sozinha. Quando um post é publicado no painel, um webhook do Supabase
-dispara o mesmo processo sem precisar de commit.
+A Vercel publica sozinha. Quando um post é publicado no painel, o gatilho `posts_rebuild`
+no banco (ver `supabase-setup.sql`) chama a Vercel e dispara o mesmo processo, sem precisar
+de commit e sem ninguém no meio. Salvar rascunho **não** dispara build — só o que o leitor
+pode ver.
 
 ### Por que este repositório é público
 
