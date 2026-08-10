@@ -1,0 +1,65 @@
+User-agent: *
+Allow: /
+
+# Buscadores tradicionais
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Robos de IA — leitura liberada de proposito: e assim que o site vira fonte
+# citada dentro de ChatGPT, Gemini, Perplexity, Claude e Copilot.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Resumo do site para leitura de LLM
+# https://spagro.ind.br/llms.txt
+
+Sitemap: https://spagro.ind.br/sitemap.xml
+
+# O painel nao entra aqui de proposito: robots.txt e publico e listar /admin.html
+# so entrega o caminho. Quem tira o painel do indice e o header X-Robots-Tag
+# (noindex, nofollow) definido no vercel.json.

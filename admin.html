@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do blog — SP Agro</title>
+<meta name="robots" content="noindex, nofollow">
+<!-- CSP vem do header HTTP (vercel.json). Fonte unica: meta duplicada aqui so cria divergencia silenciosa. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="pagina-admin">
+
+<!-- LOGIN -->
+<section id="telaLogin" class="adm-login">
+  <form class="adm-box" id="formLogin">
+    <img src="images/logo/logo-sp-agro.svg" alt="SP Agro" width="156" height="34">
+    <h1>Painel do blog</h1>
+    <p>Entre com o e-mail e a senha cadastrados.</p>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" required autocomplete="username" placeholder="voce@spagro.ind.br">
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" required autocomplete="current-password" placeholder="••••••••">
+    <button class="btn btn-primary" type="submit">Entrar</button>
+    <span class="adm-erro" id="erroLogin"></span>
+  </form>
+</section>
+
+<!-- PAINEL -->
+<section id="telaPainel" hidden>
+  <header class="adm-top">
+    <div class="wrap adm-top-inner">
+      <img src="images/logo/logo-sp-agro.svg" alt="SP Agro" width="130" height="28">
+      <span class="adm-quem">Logado como <b id="quemSou">—</b></span>
+      <div class="adm-top-acoes">
+        <a class="btn btn-outline-dark" href="blog.html" target="_blank" rel="noopener">Ver blog</a>
+        <button class="btn btn-outline-dark" type="button" id="sair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap adm-corpo">
+    <form id="formPost" class="adm-form">
+      <div class="adm-form-topo">
+        <h2 id="tituloForm">Novo post</h2>
+        <button class="btn btn-outline-dark" type="button" id="novo">Limpar / novo</button>
+      </div>
+      <input type="hidden" id="postId">
+
+      <label for="title">Título</label>
+      <input id="title" type="text" required placeholder="Ex: Como escolher a semente certa para formar pastagem">
+
+      <label for="slug">Endereço do post (slug)</label>
+      <input id="slug" type="text" placeholder="preenchido sozinho a partir do título">
+
+      <label for="excerpt">Resumo (aparece na listagem)</label>
+      <textarea id="excerpt" rows="2" placeholder="Duas linhas explicando o post"></textarea>
+
+      <label for="arquivoCapa">Imagem de capa</label>
+      <input id="arquivoCapa" type="file" accept="image/*">
+      <input id="cover_url" type="url" placeholder="ou cole aqui o endereço de uma imagem">
+
+      <label for="content">Conteúdo</label>
+      <textarea id="content" rows="16" required placeholder="Escreva aqui.
+
+## Subtítulo
+**negrito**, *itálico*, [link](https://exemplo.com)
+- item de lista
+![legenda da imagem](endereço-da-imagem)"></textarea>
+      <small class="adm-dica">Linha em branco separa parágrafo. <code>##</code> vira subtítulo, <code>**texto**</code> negrito, <code>- item</code> lista, <code>[texto](link)</code> link.</small>
+
+      <label class="adm-check"><input id="published" type="checkbox"> Publicar no site (desmarcado = rascunho, ninguém vê)</label>
+
+      <div class="adm-acoes">
+        <button class="btn btn-primary" type="submit">Salvar</button>
+        <span class="aviso" id="avisoPost"></span>
+      </div>
+    </form>
+
+    <h2 class="adm-lista-titulo">Posts</h2>
+    <div id="listaAdmin" class="adm-lista"><p>Carregando…</p></div>
+  </div>
+</section>
+
+<script src="js/sb-config.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

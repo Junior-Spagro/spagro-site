@@ -1,0 +1,438 @@
+  :root{
+    --dark:#1b1b1b;
+    --green:#082616;
+    --green-soft:#0e3a20;
+    --lime:#9fba44;
+    --lime-light:#c3d97e;
+    --cream:#e5e3d7;
+    --white:#ffffff;
+    --radius:20px;
+    --radius-sm:12px;
+    --container:1240px;
+    font-family:'Be Vietnam Pro',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:88px}
+  body{background:var(--cream);color:var(--green);line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  section{position:relative}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  h1,h2,h3{font-weight:800;line-height:1.1;letter-spacing:-.01em}
+  h2{font-size:clamp(28px,4vw,42px);margin-bottom:16px}
+  h3{font-size:20px;margin-bottom:8px}
+  p{font-size:16px}
+  .lead{font-size:18px;opacity:.85;max-width:620px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:700;font-size:15px;border:2px solid transparent;cursor:pointer;transition:.2s ease}
+  .btn-primary{background:var(--lime);color:var(--green)}
+  .btn-primary:hover{background:var(--lime-light)}
+  .btn-outline{border-color:currentColor}
+  .btn-outline:hover{background:rgba(255,255,255,.08)}
+  .btn-outline-dark{border-color:var(--green)}
+  .btn-outline-dark:hover{background:rgba(8,38,22,.06)}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--white);padding:10px 20px;border-radius:999px;font-weight:600;font-size:14px}
+  .pill-dot{width:20px;height:20px;border-radius:50%;background:var(--lime);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px}
+  .section-pad{padding:90px 0}
+  @media(max-width:768px){.section-pad{padding:60px 0}}
+
+  /* logo oficial (SVG vetor da marca) */
+  .logo{display:flex;align-items:center}
+  .logo img{height:34px;width:auto;display:block}
+  .foot-logo img{height:30px;width:auto;display:block;margin-bottom:16px}
+
+  /* header */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(229,227,215,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(8,38,22,.08)}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:var(--container);margin:0 auto}
+  nav.main-nav{display:flex;gap:30px}
+  nav.main-nav a{font-size:14px;font-weight:600;color:var(--green);opacity:.8;transition:.15s}
+  nav.main-nav a:hover{opacity:1;color:var(--lime)}
+  .header-cta{display:flex;align-items:center;gap:16px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+  .menu-toggle span{display:block;width:24px;height:2px;background:var(--green);margin:5px 0;transition:.2s}
+  @media(max-width:960px){
+    nav.main-nav{position:fixed;top:70px;left:0;right:0;bottom:0;background:var(--cream);flex-direction:column;padding:30px 24px;gap:22px;transform:translateX(100%);transition:.25s ease;overflow-y:auto}
+    nav.main-nav.open{transform:translateX(0)}
+    nav.main-nav a{font-size:18px}
+    .menu-toggle{display:block}
+    .header-cta .btn-primary{padding:10px 18px;font-size:13px}
+  }
+
+  /* hero */
+  #home{min-height:100vh;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(8,38,22,.35) 0%,rgba(8,38,22,.45) 45%,rgba(8,38,22,.94) 100%),url('../images/fabrica-drone.jpg') center/cover no-repeat;color:var(--white);padding-top:120px}
+  .hero-inner{width:100%;padding-bottom:64px}
+  #home h1{font-size:clamp(34px,5.2vw,58px);max-width:780px;margin-bottom:18px}
+  #home .lead{color:rgba(255,255,255,.88);margin-bottom:32px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+  .hero-strip{display:flex;flex-wrap:wrap;gap:14px}
+  .hero-strip span{font-size:13px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);padding:9px 16px;border-radius:999px}
+
+  /* quem somos */
+  #empresa{background:var(--cream)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:32px}}
+  .split img{border-radius:var(--radius);width:100%;height:460px;object-fit:cover}
+  #empresa p{margin-bottom:14px;opacity:.85}
+
+  /* estrutura industrial */
+  #estrutura{background:var(--green);color:var(--white)}
+  #estrutura .eyebrow{color:var(--lime)}
+  .struct-photo{width:100%;height:380px;object-fit:cover;border-radius:var(--radius);margin-top:36px;border:1px solid rgba(255,255,255,.12)}
+  @media(max-width:640px){.struct-photo{height:240px}}
+
+  /* processo produtivo */
+  #processo{background:var(--cream)}
+  .timeline{display:flex;gap:0;margin-top:48px;overflow-x:auto;padding-bottom:10px}
+  .tl-step{flex:1;min-width:150px;position:relative;padding:0 16px 0 0;text-align:left}
+  .tl-step .num{width:38px;height:38px;border-radius:50%;background:var(--green);color:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-bottom:14px}
+  .tl-step:not(:last-child)::after{content:"";position:absolute;top:19px;left:38px;right:0;height:2px;background:repeating-linear-gradient(90deg,var(--green) 0 6px,transparent 6px 12px)}
+  .tl-step .tl-ico{width:24px;height:24px;color:var(--green);margin-bottom:10px}
+  .tl-step .tl-ico svg{width:100%;height:100%}
+  .tl-step b{display:block;font-size:15px;margin-bottom:4px}
+  .tl-step p{font-size:13px;opacity:.75}
+
+  /* qualidade e tecnologia */
+  #qualidade{background:var(--green);color:var(--white)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:20px}
+  @media(max-width:860px){.two-col{grid-template-columns:1fr}}
+  .qual-block h3{color:var(--lime);font-size:22px;margin-bottom:18px}
+  .qual-block ul li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:15px}
+  .qual-block ul li svg{width:18px;height:18px;flex-shrink:0;color:var(--lime);margin-top:2px}
+
+  /* produtos */
+  #produtos{background:var(--cream)}
+  .banner-img{border-radius:var(--radius);overflow:hidden;margin:36px 0 44px}
+  .banner-img img{width:100%;height:auto;display:block}
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:900px){.prod-grid{grid-template-columns:1fr}}
+  .prod-card{border-radius:var(--radius);padding:32px 26px;display:flex;flex-direction:column;gap:14px;min-height:340px}
+  .prod-card.campo{background:var(--green);color:var(--white)}
+  .prod-card.select{background:var(--lime);color:var(--green)}
+  .prod-card.ultra{background:var(--white);color:var(--green);border:1px solid rgba(8,38,22,.12)}
+  .prod-tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+  .prod-card h3{font-size:26px}
+  .prod-card ul{margin:8px 0 18px;flex-grow:1}
+  .prod-card ul li{font-size:14px;padding:6px 0;display:flex;gap:8px;align-items:flex-start}
+  .prod-card ul li svg{width:16px;height:16px;margin-top:3px;flex-shrink:0}
+  .prod-card .btn{align-self:flex-start}
+  /* ponytail: arte das linhas já vem fechada — aspect-ratio da própria arte, sem crop nem hover */
+  .prod-photo{aspect-ratio:846/484;border-radius:14px;overflow:hidden;margin-bottom:6px;background:#f4f3ec}
+  .prod-photo img{width:100%;height:100%;object-fit:cover}
+
+  /* cultivares */
+  #cultivares{background:var(--green);color:var(--white)}
+  .cult-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-top:40px}
+  @media(max-width:900px){.cult-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:520px){.cult-grid{grid-template-columns:repeat(2,1fr)}}
+  .cult-card{background:none;color:var(--white);padding:0;text-align:center;cursor:pointer;border:none;font-family:inherit;transition:transform .2s ease}
+  .cult-card:hover{transform:translateY(-4px)}
+  /* thumb no formato da referência do cliente: círculo com um canto vivo + anel */
+  .cult-thumb{display:block;aspect-ratio:1;border-radius:50% 50% 50% 8px;overflow:hidden;border:3px solid var(--lime);padding:4px;margin-bottom:12px;transition:border-color .2s ease}
+  .cult-card:hover .cult-thumb{border-color:var(--lime-light)}
+  .cult-thumb img{width:100%;height:100%;object-fit:cover;border-radius:50% 50% 50% 4px}
+  .cult-card b{display:block;font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+
+  /* links crawlaveis pras fichas — o modal e JS, e crawler de IA nao roda JS */
+  .cult-fichas{margin-top:34px;font-size:14px;color:rgba(255,255,255,.72);line-height:2}
+  .cult-fichas a{color:var(--lime);text-decoration:underline;text-underline-offset:3px}
+  .cult-fichas a:hover{color:var(--lime-light)}
+
+  .cult-modal{position:fixed;inset:0;background:rgba(8,38,22,.8);display:none;align-items:center;justify-content:center;z-index:200;padding:24px}
+  .cult-modal.open{display:flex}
+  .cult-modal-box{background:var(--cream);color:var(--green);border-radius:var(--radius);padding:32px;max-width:560px;width:100%;position:relative;max-height:88vh;overflow-y:auto}
+  .cult-modal-box button.close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--cream);border:none;font-size:18px;line-height:1;cursor:pointer;color:var(--green)}
+  .cult-hero{width:96px;height:96px;object-fit:cover;border-radius:50% 50% 50% 8px;border:3px solid var(--lime);padding:3px;margin-bottom:16px}
+  .cult-modal-box h3{font-size:26px;margin-bottom:4px}
+  .cult-modal-box h4{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5d7a2c;margin:24px 0 10px}
+  .cult-modal-box .species{font-style:italic;opacity:.65;font-size:14px;margin-bottom:14px}
+  .cult-modal-box .cult-intro{font-size:15px;opacity:.85;line-height:1.6}
+  .cult-specs{display:grid;grid-template-columns:auto 1fr;gap:1px;background:rgba(8,38,22,.12);border:1px solid rgba(8,38,22,.12);border-radius:var(--radius-sm);overflow:hidden;font-size:14px}
+  .cult-specs dt{background:var(--cream);padding:10px 14px;font-weight:700}
+  .cult-specs dd{background:#efeee5;padding:10px 14px;opacity:.9}
+  @media(max-width:520px){.cult-specs{grid-template-columns:1fr}.cult-specs dt{padding-bottom:2px}.cult-specs dd{padding-top:2px;background:var(--cream)}}
+  .cult-adv li{position:relative;padding-left:22px;font-size:14px;opacity:.9;margin-bottom:7px}
+  .cult-adv li::before{content:"";position:absolute;left:2px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--lime)}
+  .cult-cta{margin-top:26px}
+
+  /* logistica */
+  #logistica{background:var(--cream)}
+  .log-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;margin-top:20px}
+  @media(max-width:860px){.log-grid{grid-template-columns:1fr}}
+  .log-list li{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(8,38,22,.1);font-size:15px}
+  .log-list li svg{width:20px;height:20px;color:var(--lime);flex-shrink:0}
+  .log-note{margin-top:16px;font-size:13px;opacity:.6;font-style:italic}
+  .log-photo{width:100%;height:420px;object-fit:cover;border-radius:var(--radius)}
+  @media(max-width:860px){.log-photo{height:300px}}
+
+  /* diferenciais */
+  #diferenciais{background:var(--green);color:var(--white)}
+  .dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  @media(max-width:860px){.dif-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.dif-grid{grid-template-columns:1fr}}
+  .dif-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:26px}
+  .dif-card .ico{width:38px;height:38px;color:var(--lime);margin-bottom:14px}
+  .dif-card .ico svg{width:100%;height:100%}
+  .dif-card p{font-size:13px;opacity:.7}
+
+  /* estrutura — números da operação */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+  @media(max-width:860px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.stat-row{grid-template-columns:1fr}}
+  .stat{background:rgba(159,186,68,.09);border:1px solid rgba(159,186,68,.32);border-radius:var(--radius-sm);padding:24px 22px}
+  .stat b{display:block;font-size:clamp(26px,3.2vw,34px);font-weight:800;color:var(--lime);line-height:1.05}
+  .stat span{display:block;font-size:14px;font-weight:700;margin-top:6px}
+  .stat small{display:block;font-size:12.5px;opacity:.62;margin-top:10px;line-height:1.55}
+
+  /* linha do tempo — histórico comercial */
+  #linha-do-tempo{background:var(--cream)}
+  #linha-do-tempo .wrap{max-width:1040px}
+  /* eixo central com os marcos alternando de lado */
+  .hist-grid{position:relative;margin-top:52px;padding:6px 0}
+  .hist-grid::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(8,38,22,.18);transform:translateX(-50%)}
+  .hist-card{position:relative;width:calc(50% - 46px);margin-bottom:34px;background:var(--white);border:1px solid rgba(8,38,22,.1);border-radius:var(--radius);display:flex;flex-direction:column}
+  .hist-card:last-child{margin-bottom:0}
+  .hist-card:nth-child(even){margin-left:calc(50% + 46px)}
+  .hist-card::before{content:"";position:absolute;top:26px;width:16px;height:16px;border-radius:50%;background:var(--lime);border:3px solid var(--cream);box-shadow:0 0 0 2px rgba(8,38,22,.18)}
+  .hist-card:nth-child(odd)::before{right:-57px}
+  .hist-card:nth-child(even)::before{left:-57px}
+  .hist-card::after{content:"";position:absolute;top:33px;width:36px;height:2px;background:rgba(8,38,22,.18)}
+  .hist-card:nth-child(odd)::after{right:-36px}
+  .hist-card:nth-child(even)::after{left:-36px}
+  .hist-card img{width:100%;height:210px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0}
+  .hist-body{padding:24px}
+  @media(max-width:860px){
+    .hist-grid::before{left:9px;transform:none}
+    .hist-card,.hist-card:nth-child(even){width:auto;margin-left:44px}
+    .hist-card:nth-child(odd)::before,.hist-card:nth-child(even)::before{left:-45px;right:auto}
+    .hist-card:nth-child(odd)::after,.hist-card:nth-child(even)::after{left:-24px;right:auto;width:24px}
+  }
+  .hist-year{display:inline-block;background:var(--green);color:var(--lime);font-size:13px;font-weight:800;letter-spacing:.06em;padding:5px 15px;border-radius:999px;margin-bottom:12px}
+  .hist-card b{display:block;font-size:16px;line-height:1.3;margin-bottom:8px}
+  .hist-card p{font-size:13.5px;opacity:.75}
+
+  /* faq — acordeao nativo, sem JS (a CSP nao deixa script inline e nao precisa mesmo) */
+  #faq{background:var(--cream)}
+  .faq-lista{margin-top:38px;max-width:900px}
+  .faq-item{border-bottom:1px solid rgba(8,38,22,.14)}
+  .faq-item summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font-size:17px;font-weight:700;position:relative}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";position:absolute;right:6px;top:16px;font-size:24px;font-weight:600;color:var(--lime);transition:transform .2s ease}
+  .faq-item[open] summary::after{content:"−"}
+  .faq-item summary:hover{color:#4d6b1f}
+  .faq-item p{padding:0 40px 22px 0;opacity:.8;max-width:760px}
+
+  /* historia / manifesto */
+  #historia{background:var(--cream);padding-top:0}
+  .manifesto{max-width:840px}
+  .manifesto p{margin-bottom:16px;opacity:.85;font-size:17px}
+  .values-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .values-row span{background:var(--green);color:var(--lime);font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px}
+
+  /* contato */
+  #contato{background:var(--green);color:var(--white)}
+  .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;margin-top:20px}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  form .full{grid-column:1/-1}
+  label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;opacity:.75}
+  input,select,textarea{width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:var(--white);font-family:inherit;font-size:14px}
+  input::placeholder,textarea::placeholder{color:rgba(255,255,255,.4)}
+  select option{color:var(--dark)}
+  textarea{resize:vertical;min-height:100px}
+  form .btn-primary{margin-top:6px}
+  .contact-info li{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:14px}
+  .contact-info li svg{width:18px;height:18px;color:var(--lime);flex-shrink:0;margin-top:2px}
+  .contact-info b{display:block;font-size:12px;opacity:.6;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  .form-msg{grid-column:1/-1;font-size:13px;padding:12px 14px;border-radius:10px;background:rgba(159,186,68,.15);border:1px solid var(--lime);display:none}
+  .form-msg.show{display:block}
+
+  /* botão flutuante whatsapp */
+  .wa-float{position:fixed;right:22px;bottom:22px;z-index:150;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(8,38,22,.28);transition:transform .2s ease}
+  .wa-float svg{width:32px;height:32px}
+  .wa-float:hover{transform:scale(1.07)}
+  @media(max-width:640px){.wa-float{right:16px;bottom:16px;width:52px;height:52px}.wa-float svg{width:29px;height:29px}}
+
+  /* footer */
+  footer{background:var(--dark);color:rgba(255,255,255,.7);padding:64px 0 26px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:32px;margin-bottom:44px}
+  @media(max-width:900px){.foot-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+  footer h4{color:var(--white);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+  footer ul li{padding:6px 0;font-size:14px}
+  footer ul li a:hover{color:var(--lime)}
+  footer p{font-size:13px;line-height:1.7}
+  .foot-social{display:flex;gap:10px;margin-top:16px}
+  .foot-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+  .foot-social a svg{width:16px;height:16px}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px}
+
+  /* ============ paginas internas (blog / post / admin) ============ */
+  /* ponytail: flex column + margin-top auto = rodape no pe da tela quando a pagina e curta */
+  .pagina-interna{padding-top:70px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+  .pagina-interna h1{font-size:clamp(30px,4.4vw,44px);margin-bottom:16px}
+  .pagina-interna footer{margin-top:auto}
+
+  /* faixa de topo das paginas internas */
+  .pagina-hero{background:var(--green);color:var(--white);padding:70px 0 62px}
+  .pagina-hero .lead{color:rgba(255,255,255,.85)}
+  @media(max-width:768px){.pagina-hero{padding:48px 0 44px}}
+
+  /* ficha de cultivar (paginas geradas em /cultivares) */
+  .migalha{font-size:13px;opacity:.7;margin-bottom:18px}
+  .migalha a:hover{color:var(--lime)}
+  .species-hero{font-style:italic;opacity:.7;font-size:15px;margin:-6px 0 14px}
+  .ficha-wrap{display:grid;grid-template-columns:1fr 340px;gap:56px;align-items:start}
+  @media(max-width:900px){.ficha-wrap{grid-template-columns:1fr;gap:40px}}
+  .ficha-corpo h2{font-size:clamp(22px,2.8vw,28px);margin:0 0 18px}
+  .ficha-corpo h2 + *{margin-top:0}
+  .ficha-corpo > *:not(h2){margin-bottom:16px}
+  .ficha-corpo .cult-specs{margin-bottom:44px}
+  .ficha-corpo .cult-adv{margin-bottom:44px}
+  .ficha-acoes{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+  .ficha-lado img{width:100%;height:auto;border-radius:var(--radius);margin-bottom:26px}
+  .ficha-lado h3{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5d7a2c;margin:26px 0 12px}
+  .ficha-lado h3:first-of-type{margin-top:0}
+  .ficha-lado p{font-size:14px;opacity:.8}
+  .ficha-lado a{text-decoration:underline;text-underline-offset:3px}
+  .ficha-links li{padding:7px 0;border-bottom:1px solid rgba(8,38,22,.1);font-size:14px}
+  .ficha-links a{text-decoration:none;font-weight:600}
+  .ficha-links a:hover{color:var(--lime)}
+
+  /* blog — listagem */
+  .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media(max-width:900px){.post-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.post-grid{grid-template-columns:1fr}}
+  .post-card{background:var(--white);border:1px solid rgba(8,38,22,.1);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+  .post-card img{width:100%;height:200px;object-fit:cover}
+  .post-body{padding:24px;display:flex;flex-direction:column;gap:8px;flex-grow:1}
+  .post-date{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6f8a2e}
+  .post-card h3{font-size:19px;line-height:1.3}
+  .post-card p{font-size:14px;opacity:.75;flex-grow:1}
+  .post-link{font-size:14px;font-weight:700;color:#4d6b1f}
+  .post-link:hover{color:var(--green)}
+  .blog-empty{grid-column:1/-1;opacity:.65;padding:30px 0}
+  /* estado "ainda sem post" — card, nao um paragrafo solto no vazio */
+  .blog-vazio{grid-column:1/-1;max-width:760px;margin:0 auto;background:var(--white);border:1px solid rgba(8,38,22,.1);border-radius:var(--radius);padding:52px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+  .blog-vazio .ico{width:60px;height:60px;border-radius:50%;background:rgba(159,186,68,.18);color:#4d6b1f;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+  .blog-vazio .ico svg{width:28px;height:28px}
+  .blog-vazio h2{font-size:clamp(21px,2.6vw,26px);margin:0}
+  .blog-vazio p{max-width:520px;opacity:.75}
+  .blog-vazio .btn{margin-top:10px}
+  @media(max-width:620px){.blog-vazio{padding:38px 24px}}
+
+  /* blog — post */
+  .post-single{max-width:760px}
+  .post-single .post-date{display:block;margin-bottom:10px}
+  .post-single .lead{margin-bottom:24px}
+  .post-cover{width:100%;border-radius:var(--radius);margin:10px 0 32px;max-height:420px;object-fit:cover}
+  .post-content{font-size:17px;line-height:1.75}
+  .post-content p{margin-bottom:18px;font-size:17px}
+  .post-content h2{font-size:26px;margin:34px 0 12px}
+  .post-content h3{font-size:20px;margin:26px 0 10px}
+  .post-content ul{margin:0 0 18px 20px;list-style:disc}
+  .post-content li{margin-bottom:6px}
+  .post-content img{width:100%;border-radius:var(--radius-sm);margin:22px 0}
+  .post-content a{color:#4d6b1f;text-decoration:underline}
+  .post-single .btn{margin-top:34px}
+
+  /* admin */
+  .pagina-admin{background:var(--cream)}
+  .adm-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .adm-box{background:var(--white);border:1px solid rgba(8,38,22,.1);border-radius:var(--radius);padding:38px;width:100%;max-width:400px;display:flex;flex-direction:column;gap:6px}
+  .adm-box h1{font-size:26px;margin:18px 0 4px}
+  .adm-box p{font-size:14px;opacity:.7;margin-bottom:14px}
+  .adm-box .btn{margin-top:18px;justify-content:center}
+  .adm-erro{color:#a32020;font-size:13px;min-height:18px;margin-top:10px}
+  .pagina-admin label{margin-top:14px;font-size:12px;font-weight:700;opacity:.75;text-transform:none;letter-spacing:0}
+  .pagina-admin input,.pagina-admin textarea{background:var(--white);border:1px solid rgba(8,38,22,.2);color:var(--green);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:14px;width:100%}
+  .pagina-admin textarea{resize:vertical;line-height:1.6}
+  .pagina-admin input::placeholder,.pagina-admin textarea::placeholder{color:rgba(8,38,22,.35)}
+  .adm-top{background:var(--green);color:var(--white);padding:16px 0}
+  .adm-top-inner{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .adm-top .btn{color:var(--white);border-color:rgba(255,255,255,.4);padding:9px 16px;font-size:13px}
+  .adm-quem{font-size:13px;opacity:.75;flex-grow:1}
+  .adm-top-acoes{display:flex;gap:10px}
+  .adm-corpo{padding:36px 24px 70px}
+  .adm-form{background:var(--white);border:1px solid rgba(8,38,22,.1);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column}
+  .adm-form-topo{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .adm-form h2{font-size:22px}
+  .adm-dica{font-size:12px;opacity:.6;margin-top:8px}
+  .adm-dica code{background:rgba(8,38,22,.07);padding:1px 5px;border-radius:4px}
+  .adm-check{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;font-weight:600;opacity:1;text-transform:none}
+  .adm-check input{width:auto}
+  .adm-acoes{display:flex;align-items:center;gap:16px;margin-top:24px}
+  .aviso{font-size:13px;font-weight:600;opacity:0;transition:.2s}
+  .aviso.bom{opacity:1;color:#3f6b16}
+  .aviso.ruim{opacity:1;color:#a32020}
+  .adm-lista-titulo{font-size:20px;margin:42px 0 16px}
+  .adm-item{background:var(--white);border:1px solid rgba(8,38,22,.1);border-radius:var(--radius-sm);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+  .adm-item div{flex-grow:1;min-width:180px}
+  .adm-item small{display:block;font-size:12px;opacity:.55}
+  .adm-item .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:999px}
+  .adm-item .tag.on{background:var(--lime);color:var(--green)}
+  .adm-item .tag.off{background:rgba(8,38,22,.1);color:var(--green)}
+  .adm-item button{background:none;border:1px solid rgba(8,38,22,.25);color:var(--green);border-radius:999px;padding:7px 14px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+  .adm-item button:hover{background:rgba(8,38,22,.06)}
+  .adm-item button.apagar{color:#a32020;border-color:rgba(163,32,32,.35)}
+
+  /* ---- modo embed (?embed=1): dentro do iframe do Wix ----
+     ponytail: o quadro do Wix nao tem scroll proprio, entao ele recebe a altura
+     inteira do site. Consequencia: 100vh passa a valer a pagina toda e
+     position:fixed gruda no iframe, nao na janela de quem visita. Aqui os dois
+     viram medida fixa/absoluta. O botao flutuante do WhatsApp sai daqui e passa
+     a ser um elemento do proprio Wix, por cima do quadro — dentro de um iframe
+     alto nada consegue flutuar na tela do visitante. */
+  html.embed #home{min-height:820px}
+  html.embed header{position:absolute}
+  html.embed .wa-float{display:none}
+  html.embed .cult-modal{position:absolute;min-height:100%}
+
+  /* ---- ajustes de celular (pedido do Junio, 07/08) ----
+     ponytail: hero de 100vh num aparelho alto amplia demais a foto da fabrica e o
+     gradiente escuro come o resto. Encurta o bloco e clareia o topo — o texto
+     continua branco sobre area escura, entao o contraste se mantem. */
+  @media(max-width:700px){
+    #home,html.embed #home{
+      min-height:0;
+      padding-top:92px;
+      background-position:center 32%;
+      background-image:linear-gradient(180deg,rgba(8,38,22,.26) 0%,rgba(8,38,22,.44) 52%,rgba(8,38,22,.92) 100%),url('../images/fabrica-drone.jpg');
+    }
+    #home h1{font-size:30px}
+    .hero-inner{padding-bottom:44px}
+    .hero-actions{margin-bottom:36px}
+  }
+
+  /* logo + botao + hamburguer nao cabem lado a lado em tela estreita: o CTA subia
+     por cima da marca. Encolhe os tres e tira o respiro exagerado das laterais. */
+  @media(max-width:560px){
+    .header-inner{padding:12px 16px;gap:10px}
+    .logo{flex-shrink:1;min-width:0}
+    .logo img{height:26px}
+    .header-cta{gap:6px;flex-shrink:0}
+    .header-cta .btn-primary{padding:9px 13px;font-size:12px;white-space:nowrap}
+  }
+
+  /* O editor mobile do Wix desenha tudo a 320px e depois escala pro aparelho, entao
+     e nessa largura que o hero tem que caber — a 320 o h1 quebrava em 5 linhas e o
+     bloco ia a 888px, cortando o botao. ponytail: so tipografia e respiro, sem mexer
+     no layout. */
+  @media(max-width:400px){
+    #home,html.embed #home{padding-top:80px}
+    #home h1{font-size:26px;line-height:1.16}
+    #home .lead{font-size:14px;line-height:1.5;margin-bottom:24px}
+    .hero-inner{padding-bottom:32px}
+    .hero-actions{gap:10px;margin-bottom:26px}
+    .hero-actions .btn{padding:13px 20px;font-size:14px}
+    .hero-strip{gap:8px}
+    .hero-strip span{font-size:12px;padding:7px 12px}
+  }
+
+  /* Clarear o gradiente pra mostrar a fabrica (pedido do Junio) deixou o texto
+     branco sobre ceu claro, sem contraste. ponytail: sombra no texto em vez de
+     escurecer a foto de novo — atende o pedido e mantem a leitura. */
+  @media(max-width:700px){
+    #home .eyebrow,#home h1,#home .lead{text-shadow:0 2px 14px rgba(8,38,22,.6)}
+    #home,html.embed #home{background-image:linear-gradient(180deg,rgba(8,38,22,.34) 0%,rgba(8,38,22,.48) 52%,rgba(8,38,22,.92) 100%),url('../images/fabrica-drone.jpg')}
+  }
