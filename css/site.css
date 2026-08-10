@@ -12,6 +12,10 @@
     font-family:'Be Vietnam Pro',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  /* qualquer display escrito no CSS (flex, grid, block) ganha do atributo hidden, que
+     so vale por display:none do navegador. Sem esta linha, esconder um bloco pelo JS
+     simplesmente nao acontece — foi assim que a tela de login ficou por cima do painel. */
+  [hidden]{display:none !important}
   html{scroll-behavior:smooth;scroll-padding-top:88px}
   body{background:var(--cream);color:var(--green);line-height:1.55;-webkit-font-smoothing:antialiased}
   img{max-width:100%;display:block}
