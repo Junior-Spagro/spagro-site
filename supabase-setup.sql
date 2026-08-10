@@ -103,12 +103,29 @@ create policy "capa apaga admin" on storage.objects
 --
 -- Feito com pg_net puro em vez do "Database Webhooks" do painel: menos peca movel
 -- e fica versionado aqui, entao recriar o projeto nao perde o comportamento.
+--
+-- ATENCAO: a URL do deploy hook NAO entra neste arquivo. Este repositorio e
+-- publico, e quem tiver aquela URL dispara build de producao a vontade ate
+-- estourar o limite da conta — e a partir dai o blog para de atualizar. Ela mora
+-- na tabela `config`, que nao tem policy nenhuma e por isso e invisivel pelo
+-- navegador. So a funcao abaixo (security definer) enxerga.
+-- Depois de rodar este arquivo, cadastrar a URL uma vez:
+--   insert into public.config (chave, valor)
+--   values ('deploy_hook', 'https://api.vercel.com/v1/integrations/deploy/<projeto>/<id>')
+--   on conflict (chave) do update set valor = excluded.valor;
 -- ---------------------------------------------------------------------------
 create extension if not exists pg_net;
 
+create table if not exists public.config (
+  chave text primary key,
+  valor text not null
+);
+alter table public.config enable row level security;
+-- sem policy de proposito: sem policy = ninguem le pelo navegador.
+
 create or replace function public.avisa_vercel() returns trigger
 language plpgsql security definer set search_path = public as $fn$
-declare mexeu boolean;
+declare mexeu boolean; hook text;
 begin
   -- rascunho nao dispara: o autor salva varias vezes enquanto escreve, e cada
   -- disparo e uma build inteira. So interessa o que o leitor pode ver.
@@ -117,12 +134,11 @@ begin
     when 'DELETE' then old.published
     else new.published or old.published
   end;
-  if mexeu then
-    perform net.http_post(
-      url := 'https://api.vercel.com/v1/integrations/deploy/prj_IjrDHlcY0HT1cZruTUq42TIY9JNR/Zv4odRds1R',
-      body := '{}'::jsonb
-    );
-  end if;
+  if not mexeu then return null; end if;
+
+  select valor into hook from public.config where chave = 'deploy_hook';
+  if hook is null then return null; end if;  -- sem hook cadastrado, nao quebra o salvamento
+  perform net.http_post(url := hook, body := '{}'::jsonb);
   return null;
 end $fn$;
 
