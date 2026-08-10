@@ -125,3 +125,23 @@ git add -A && git commit -m "o que mudou" && git push
 
 A Vercel publica sozinha. Quando um post é publicado no painel, um webhook do Supabase
 dispara o mesmo processo sem precisar de commit.
+
+### ⚠️ Armadilha: quem assina o commit
+
+Este repositório é **privado** e a conta Vercel é do plano **Hobby** — que não permite
+colaboração em repositório privado. A Vercel só constrói se o **autor do commit no `HEAD`**
+for o dono do time (a conta `Junior-Spagro`). Commit assinado por outra pessoa faz **todo**
+build a partir do git parar antes de começar: `readyState: BLOCKED`, zero log, e o Deploy
+Hook do blog para junto — ou seja, publicar post deixa de virar página.
+
+Quem for mexer no código precisa configurar, dentro deste repositório:
+
+```bash
+git config user.name  "Junior-Spagro"
+git config user.email "315404518+Junior-Spagro@users.noreply.github.com"
+```
+
+Créditos de quem realmente escreveu vão em `Co-Authored-By:` na mensagem.
+
+Para acabar com a restrição de vez: tornar o repositório público (colaboração é livre em
+repo público) ou migrar a conta para o plano Pro.
