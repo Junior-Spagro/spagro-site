@@ -18,40 +18,20 @@
 
   var sb = window.supabase.createClient(window.SB_URL, window.SB_ANON_KEY);
 
-  function esc(s) {
-    return String(s == null ? '' : s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-  }
+  /* esc/render vem do js/markdown.js — mesmo codigo que o build usa pra gerar
+     /blog/<slug>.html. Nao duplicar aqui. */
+  var esc = window.SPMarkdown.esc;
+  var render = window.SPMarkdown.render;
 
   function data(iso) {
     return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
   }
 
-  /* so http(s), mailto e caminho interno viram link — corta javascript:/data: */
-  function endereco(u) {
-    return /^(https?:|mailto:|\/|#)/i.test(u) ? u : '#';
-  }
-
-  /* ponytail: markdown minimo (titulo, negrito, italico, link, imagem, lista).
-     Escapa tudo ANTES — nenhum HTML do editor chega no DOM. */
-  function render(txt) {
-    var out = esc(txt)
-      .replace(/^### (.*)$/gm, '<h3>$1</h3>')
-      .replace(/^## (.*)$/gm, '<h2>$1</h2>')
-      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (_, alt, src) {
-        return '<img src="' + endereco(src) + '" alt="' + alt + '" loading="lazy">';
-      })
-      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, txt, href) {
-        return '<a href="' + endereco(href) + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
-      })
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
-      .replace(/^[-*] (.*)$/gm, '<li>$1</li>');
-    out = out.replace(/(<li>[\s\S]*?<\/li>)(?!\s*<li>)/g, '<ul>$1</ul>');
-    return out.split(/\n{2,}/).map(function (bloco) {
-      return /^\s*<(h2|h3|ul|img)/.test(bloco) ? bloco : '<p>' + bloco.replace(/\n/g, '<br>') + '</p>';
-    }).join('\n');
+  /* endereco do post publicado: a pagina estatica gerada no build.
+     Enquanto o rebuild nao terminou, o rewrite do vercel.json entrega o post.html
+     (mesma URL, montada por JS) — o leitor nunca ve 404. */
+  function url(slug) {
+    return '/blog/' + encodeURIComponent(slug) + '.html';
   }
 
   var lista = document.getElementById('postList');
@@ -66,19 +46,24 @@
         if (!r.data.length) { lista.innerHTML = '<p class="blog-empty">Nenhum conteúdo publicado ainda. Em breve.</p>'; return; }
         lista.innerHTML = r.data.map(function (p) {
           return '<article class="post-card">' +
-            (p.cover_url ? '<a href="post.html?slug=' + encodeURIComponent(p.slug) + '"><img src="' + esc(p.cover_url) + '" alt="" loading="lazy"></a>' : '') +
+            (p.cover_url ? '<a href="' + url(p.slug) + '"><img src="' + esc(p.cover_url) + '" alt="" loading="lazy"></a>' : '') +
             '<div class="post-body">' +
               '<span class="post-date">' + esc(data(p.created_at)) + '</span>' +
-              '<h3><a href="post.html?slug=' + encodeURIComponent(p.slug) + '">' + esc(p.title) + '</a></h3>' +
+              '<h3><a href="' + url(p.slug) + '">' + esc(p.title) + '</a></h3>' +
               '<p>' + esc(p.excerpt) + '</p>' +
-              '<a class="post-link" href="post.html?slug=' + encodeURIComponent(p.slug) + '">Ler o conteúdo →</a>' +
+              '<a class="post-link" href="' + url(p.slug) + '">Ler o conteúdo →</a>' +
             '</div></article>';
         }).join('');
       });
   }
 
   if (artigo) {
-    var slug = new URLSearchParams(location.search).get('slug') || '';
+    /* /blog/<slug>.html cai aqui pelo rewrite (o caminho nao tem query string).
+       O ?slug= continua valendo pros links antigos que ja estao por ai. */
+    var doCaminho = location.pathname.match(/^\/blog\/(.+)\.html$/);
+    var slug = doCaminho
+      ? decodeURIComponent(doCaminho[1])
+      : (new URLSearchParams(location.search).get('slug') || '');
     sb.from('posts').select('title,excerpt,cover_url,content,created_at')
       .eq('slug', slug).eq('published', true).maybeSingle()
       .then(function (r) {

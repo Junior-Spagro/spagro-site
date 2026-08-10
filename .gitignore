@@ -1,3 +1,7 @@
 .vercel
 .env*
 .DS_Store
+
+# Gerado no build a partir dos posts do Supabase — muda sem commit, entao nao versiona.
+# (cultivares/ e o contrario: sai do app.js, que esta aqui no repo, entao vai versionado.)
+blog/

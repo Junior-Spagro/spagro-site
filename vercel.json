@@ -1,4 +1,12 @@
 {
+  "buildCommand": "python3 _seo-build/build_seo.py",
+  "outputDirectory": ".",
+  "crons": [
+    { "path": "/api/keepalive", "schedule": "0 12 * * *" }
+  ],
+  "rewrites": [
+    { "source": "/blog/:path*", "destination": "/post.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

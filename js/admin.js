@@ -102,7 +102,10 @@
     e.preventDefault();
     var dados = {
       title: campos.title.value.trim(),
-      slug: campos.slug.value.trim() || slugificar(campos.title.value),
+      /* sempre pela slugificar: o slug vira nome de arquivo e caminho no site, entao
+         nao pode sair daqui com barra, acento ou espaco. O banco tambem barra (CHECK),
+         mas aqui o Junio nem chega a ver o erro. */
+      slug: slugificar(campos.slug.value.trim() || campos.title.value),
       excerpt: campos.excerpt.value.trim(),
       cover_url: campos.cover.value.trim() || null,
       content: campos.content.value,
