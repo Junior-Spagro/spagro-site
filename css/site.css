@@ -71,6 +71,7 @@
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px}
   .hero-strip{display:flex;flex-wrap:wrap;gap:14px}
   .hero-strip span{font-size:13px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);padding:9px 16px;border-radius:999px}
+  .lead-curta{display:none}
 
   /* quem somos */
   #empresa{background:var(--cream)}
@@ -439,4 +440,21 @@
   @media(max-width:700px){
     #home .eyebrow,#home h1,#home .lead{text-shadow:0 2px 14px rgba(8,38,22,.6)}
     #home,html.embed #home{background-image:linear-gradient(180deg,rgba(8,38,22,.34) 0%,rgba(8,38,22,.48) 52%,rgba(8,38,22,.92) 100%),url('../images/fabrica-drone.jpg')}
+  }
+
+  /* ---- topo mais limpo no celular (pedido do Junio, 11/08) ----
+     ponytail: na tela pequena o eyebrow e os 3 chips repetem, palavra por palavra,
+     o que o h1 e o proprio lead ja dizem — tirar redundancia limpa mais do que
+     encolher fonte. O lead ganha uma versao curta que absorve o que os chips
+     diziam. Desktop segue igual: tudo isso volta acima de 700px. */
+  @media(max-width:700px){
+    #home .eyebrow,.hero-strip{display:none}
+    .lead-longa{display:none}
+    .lead-curta{display:inline}
+    #home .lead{margin-bottom:26px}
+    .hero-actions{margin-bottom:0}
+    /* na tela pequena a primeira dobra pedia 4 acoes ao mesmo tempo: cotacao no
+       header (fixo), os dois botoes daqui e o WhatsApp flutuante. O secundario e
+       o que sai — o header ja cobre o contato e o zap fica sempre na tela. */
+    .hero-actions .btn-outline{display:none}
   }
